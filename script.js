@@ -2,6 +2,7 @@
 function renderText(domElt, text) {
     domElt.innerText = text;
 }
+
 function handleWord(text) {
     const textArr = text.split(" ");
     let wordCount = 0;
@@ -11,6 +12,7 @@ function handleWord(text) {
             wordCount += 1;
         }
     }
+
     return wordCount;
 }
 
@@ -19,26 +21,16 @@ function handleChar(text) {
 }
 
 function init() {
-    const textArea = document.querySelector("tetxarea");
-    const charDom = document.querySelector("#letterCount");
-    const wordDOM = document.querySelector("wordCount");
+    const textArea = document.querySelector("textarea");
+    const charDOM = document.querySelector("#letterCount");
+    const wordDOM = document.querySelector("#wordCount");
+
+    textArea.addEventListener("input", (event) => {
+        const text = event.target.value.trim();
+
+        renderText(wordDOM, handleWord(text));
+        renderText(charDOM, handleChar(text));
+    });
 }
-textArea.addEventListener("input", (event) => {
-
-    const text = event.target.value.trim();
-
-
-
-
-    renderText(wordDOM, handleWord(text));
-
-    renderText(charDOM, handleChar(text));
-
-});
-
-
-
-
-
 
 init();
